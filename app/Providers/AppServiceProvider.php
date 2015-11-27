@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             'google', // extending default google with new full token functionality
             function ($app) use ($socialite) {
                 $config = $app['config']['services.google'];
-                return $socialite->buildProvider('App\Ytm\Socialite\GoogleCustomProvider', $config);
+                return $socialite->buildProvider('\App\Ytm\Socialite\GoogleCustomProvider', $config);
             }
         );
     }
