@@ -12,5 +12,26 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
+
+
+
+
+Route::get('/videos/search', ['uses' => 'VideosController@search', 'as' => 'search.video']);
+
+
+
+Route::group(['prefix' => 'api'], function() {
+
+    Route::get('/videos/search', ['uses' => 'API\GAPIVideoController@searchVideos', 'as' => 'api.videos.search']);
+
+    Route::get('/comment/insert', ['uses' => 'API\GAPICommentController@comment', 'as' => 'api.comment.insert']);
+});
+
+
+
+Route::group( ['prefix' => 'auth'], function ()
+{
+    Route::get( '/login/{provider}', ['uses' => 'SocialLoginController@login', 'as' => 'social.login'] );
+} );

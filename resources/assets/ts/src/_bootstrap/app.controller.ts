@@ -1,0 +1,4 @@
+module ytm {
+    'use strict';
+
+}
