@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('test');
-});
+
 
 
 
 
 Route::get('/videos/search', ['uses' => 'VideosController@search', 'as' => 'search.video']);
-
+Route::get('/', ['uses' => 'VideosController@search', 'as' => 'search.video']);
 
 
 Route::group(['prefix' => 'api'], function() {
