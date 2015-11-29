@@ -16,10 +16,11 @@
 
 
 
-Route::get('/', function() {
-    return view('test');
-});
+//Route::get('/', function() {
+//    return view('test');
+//});
 
+Route::get('/', ['uses' => 'VideosController@search', 'as' => 'search.video']);
 Route::get('/videos/search', ['uses' => 'VideosController@search', 'as' => 'search.video']);
 
 
