@@ -187,4 +187,3 @@ var ytm;
     })(comment = ytm.comment || (ytm.comment = {}));
 })(ytm || (ytm = {}));
 //# sourceMappingURL=comment.controller.js.map
-//# sourceMappingURL=app.js.map

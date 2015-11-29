@@ -26,7 +26,7 @@ class Youtube {
     /**
      * GapiRepo constructor.
      */
-    public function __construct()
+    public function __construct ()
     {
 
         $this->client = new Google_Client();
@@ -41,9 +41,10 @@ class Youtube {
 
     /**
      * @param array $params
+     *
      * @return array|bool
      */
-    public function getVideoList( Array $params )
+    public function getVideoList ( Array $params )
     {
         try
         {
@@ -51,30 +52,30 @@ class Youtube {
 
             $searchResponse = $this->youtube->search->listSearch( 'id,snippet', $params );
 
-            $results = [];
-            foreach ($searchResponse->getItems() as $searchResult)
+            $results = [ ];
+            foreach ( $searchResponse->getItems() as $searchResult )
             {
 
 //                if ( $searchResult["id"]["kind"] == "youtube#video" )
 //                {
 
-                    $obj = new \stdClass;
+                $obj = new \stdClass;
 
-                    $obj->videoId = $searchResult['id']['videoId'];
-                    $obj->kind = $searchResult['id']['kind'];
+                $obj->videoId = $searchResult['id']['videoId'];
+                $obj->kind = $searchResult['id']['kind'];
 
 
-                    $obj->publishedAt = $searchResult['snippet']['publishedAt'];
-                    $obj->channelId = $searchResult['snippet']['channelId'];
-                    $obj->title = $searchResult['snippet']['title'];
-                    $obj->description = $searchResult['snippet']['description'];
-                    $obj->thumbnailDefault = $searchResult['snippet']['thumbnails']['default']['url'];
-                    $obj->thumbnailMedium = $searchResult['snippet']['thumbnails']['medium']['url'];
-                    $obj->thumbnailHigh = $searchResult['snippet']['thumbnails']['high']['url'];
-                    $obj->channelTitle = $searchResult['snippet']['channelTitle'];
-                    $obj->liveBroadcastContent = $searchResult['snippet']['liveBroadcastContent'];
+                $obj->publishedAt = $searchResult['snippet']['publishedAt'];
+                $obj->channelId = $searchResult['snippet']['channelId'];
+                $obj->title = $searchResult['snippet']['title'];
+                $obj->description = $searchResult['snippet']['description'];
+                $obj->thumbnailDefault = $searchResult['snippet']['thumbnails']['default']['url'];
+                $obj->thumbnailMedium = $searchResult['snippet']['thumbnails']['medium']['url'];
+                $obj->thumbnailHigh = $searchResult['snippet']['thumbnails']['high']['url'];
+                $obj->channelTitle = $searchResult['snippet']['channelTitle'];
+                $obj->liveBroadcastContent = $searchResult['snippet']['liveBroadcastContent'];
 
-                    $results[] = $obj;
+                $results[] = $obj;
 //                }
             }
 
@@ -89,14 +90,38 @@ class Youtube {
         }
     }
 
+    /**
+     * @param       $commentText
+     * @param array $videoIds
+     *
+     * @return string
+     */
+    public function commentVideos ( $commentText, Array $videoIds )
+    {
+        $result = [ ];
+
+        foreach ( $videoIds as $videoId )
+        {
+            if ( $this->comment( $videoId, $commentText ) )
+            {
+                $result[ $videoId ] = 'success';
+            } else
+            {
+                $result[ $videoId ] = 'failed';
+            }
+        }
+
+        return json_encode( $result );
+    }
 
     /**
-     * @param $videoId
-     * @param $commentText
+     * @param      $videoId
+     * @param      $commentText
      * @param null $channelId
+     *
      * @return bool
      */
-    public function comment( $videoId, $commentText, $channelId = null )
+    public function comment ( $videoId, $commentText, $channelId = null )
     {
         try
         {
@@ -127,6 +152,7 @@ class Youtube {
             {
                 return true;
             }
+
             return false;
         }
         catch ( \Google_Service_Exception $e )
@@ -137,30 +163,6 @@ class Youtube {
         {
             return false;
         }
-
-    }
-
-
-    /**
-     * @param $commentText
-     * @param array $videoIds
-     * @return string
-     */
-    public function commentVideos( $commentText, Array $videoIds )
-    {
-        $result = [];
-
-        foreach($videoIds as $videoId)
-        {
-            if($this->comment($videoId, $commentText))
-            {
-                $result[$videoId] = 'success';
-            }
-            else {
-                $result[$videoId] = 'failed';
-            }
-        }
-        return json_encode($result);
     }
 
 
