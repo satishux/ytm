@@ -45,12 +45,10 @@
                                                 </a>
                                             </div>
                                             <div style="display : table-cell; vertical-align: top; padding-left : 20px">
-                                                <h3 class="h5 font-600 m-b-5"><a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank">@{{ result.title }}</a></h3>
-                                                <div class="font-13 text-success m-b-10">
-                                                    Channel : @{{ result.channelTitle }}
+                                                <h3 class="h5 font-600 m-b-5"><a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank" ng-bind="result.title"></a></h3>
+                                                <div class="font-13 text-success m-b-10" ng-bind="result.channelTitle">
                                                 </div>
-                                                <p>
-                                                    @{{ result.description }}
+                                                <p ng-bind="result.description">
                                                 </p>
                                             </div>
                                         </div>

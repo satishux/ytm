@@ -22,6 +22,9 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right pull-right">
+                    <li>
+                        <a class="waves-effect waves-light btn btn-danger" href="/auth/login/google">Login</a>
+                    </li>
                     <li class="dropdown hidden-xs">
                         @include('layouts.top-nav.notifications')
                     </li>
