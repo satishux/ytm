@@ -121,10 +121,10 @@ elixir(function (mix) {
      * Core Theme JS
      *
      */
-    mix.scripts([
-        "src/theme/jquery.core.js",
-        "src/theme/jquery.app.js"
-    ], 'public/js/theme.core.js');
+    //mix.scripts([
+    //    "src/theme/jquery.core.js",
+    //    "src/theme/jquery.app.js"
+    //], 'public/js/theme.core.js');
 
     /**
      * Jquery

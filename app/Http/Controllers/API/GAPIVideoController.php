@@ -44,7 +44,7 @@ class GAPIVideoController extends Controller
 
         $data = json_decode($request->get('data'), true);
 
-        $results = $this->youtube->getVideoList(['q' => $data['input'], 'maxResults' => 5, 'type' => $data['type'], 'order' => $data['order']]);
+        $results = $this->youtube->getVideoList(['q' => $data['input'], 'maxResults' => 20, 'type' => $data['type'], 'order' => $data['order']]);
 
         return $results;
 
