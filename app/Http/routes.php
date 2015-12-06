@@ -12,43 +12,39 @@
 */
 
 
-
-
-
-
-//Route::get('/', function() {
-//    return view('test');
-//});
-
-Route::get('/', [function() {
-    return view('auth.login');
-}, 'as' => 'search.video']);
-
-Route::get('/videos/search', ['uses' => 'VideosController@search', 'as' => 'search.video']);
-
-
-Route::group(['prefix' => 'user'], function() {
-
-    Route::get('create', ['uses' => 'UsersController@create', 'as' => 'user.create']);
-    Route::post('create', ['uses' => 'UsersController@store', 'as' => 'user.create']);
-});
-
-
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
-
-    Route::get('/videos/search', ['uses' => 'API\GAPIVideoController@searchVideos', 'as' => 'api.videos.search']);
-
-    Route::get('/comment/insert', ['uses' => 'API\GAPICommentController@comment', 'as' => 'api.comment.insert']);
-});
-
-
-
-Route::group( ['prefix' => 'auth'], function ()
+Route::group( [ 'prefix' => 'api' ], function ()
 {
-    Route::get( '/login/{provider}', ['uses' => 'SocialLoginController@login', 'as' => 'social.login'] );
-    Route::get('/login', 'Auth\AuthController@getLogin');
-    Route::post('/login', 'Auth\AuthController@postLogin');
-    Route::get('/logout', 'Auth\AuthController@getLogout');
+    Route::get( '/videos/search', [ 'uses' => 'API\GAPIVideoController@searchVideos', 'as' => 'api.videos.search' ] );
+    Route::get( '/comment/insert', [ 'uses' => 'API\GAPICommentController@comment', 'as' => 'api.comment.insert' ] );
+} );
+
+
+Route::get( '/', [ function ()
+{
+    return view( 'auth.login' );
+}, 'as' => 'search.video' ] );
+
+
+Route::group( [ 'middleware' => 'auth' ], function ()
+{
+    Route::get( '/videos/search', [ 'uses' => 'VideosController@search', 'as' => 'search.video' ] );
+} );
+
+
+Route::group( [ 'prefix' => 'user' ], function ()
+{
+    Route::get( 'create', [ 'uses' => 'UsersController@create', 'as' => 'user.create' ] );
+    Route::post( 'create', [ 'uses' => 'UsersController@store', 'as' => 'user.create' ] );
+} );
+
+
+Route::group( [ 'prefix' => 'auth' ], function ()
+{
+    Route::get( '/login/{provider}', [ 'uses' => 'Auth\SocialAuthController@login', 'as' => 'social.login' ] );
+    Route::get( '/logout/{provider}', [ 'uses' => 'Auth\SocialAuthController@logout', 'as' => 'social.logout' ] );
+    Route::get( '/login', ['uses' => 'Auth\AuthController@getLogin', 'as' => 'get.login'] );
+    Route::post( '/login', ['uses' => 'Auth\AuthController@postLogin', 'as' => 'post.login'] );
+    Route::get( '/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'get.logout'] );
 } );
 
 

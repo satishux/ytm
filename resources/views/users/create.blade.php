@@ -8,7 +8,11 @@
     <div class="wrapper-page">
         <div class=" card-box">
             <div class="panel-heading">
-                <h3 class="text-center"> Sign Up to <strong class="text-custom">YTM</strong> </h3>
+                @if(session('g_email'))
+                    <h3 class="text-center"> We will be creating <strong class="text-custom">YTM</strong> account from following credentials</h3>
+                @else
+                    <h3 class="text-center"> Sign Up to <strong class="text-custom">YTM</strong> </h3>
+                @endif
             </div>
 
             <div class="panel-body">

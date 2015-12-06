@@ -21,6 +21,7 @@
     "autoload": {
         "classmap": [
             "database",
+            "app/Ytm",
             "app/Ytm/socialite/GoogleCustomProvider.php"
         ],
         "psr-4": {
