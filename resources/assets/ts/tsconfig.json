@@ -5,5 +5,9 @@
     "sourceMap": true,
     "removeComments": false,
     "outDir" : "./../js"
-  }
+  },
+  "exclude": [
+    "./src/theme/jquery.core.ts",
+    "./src/theme/jquery.app.ts"
+  ]
 }

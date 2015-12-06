@@ -20,11 +20,21 @@
 //    return view('test');
 //});
 
-Route::get('/', ['uses' => 'VideosController@search', 'as' => 'search.video']);
+Route::get('/', [function() {
+    return view('auth.login');
+}, 'as' => 'search.video']);
+
 Route::get('/videos/search', ['uses' => 'VideosController@search', 'as' => 'search.video']);
 
 
-Route::group(['prefix' => 'api'], function() {
+Route::group(['prefix' => 'user'], function() {
+
+    Route::get('create', ['uses' => 'UsersController@create', 'as' => 'user.create']);
+    Route::post('create', ['uses' => 'UsersController@store', 'as' => 'user.create']);
+});
+
+
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
     Route::get('/videos/search', ['uses' => 'API\GAPIVideoController@searchVideos', 'as' => 'api.videos.search']);
 
@@ -36,4 +46,9 @@ Route::group(['prefix' => 'api'], function() {
 Route::group( ['prefix' => 'auth'], function ()
 {
     Route::get( '/login/{provider}', ['uses' => 'SocialLoginController@login', 'as' => 'social.login'] );
+    Route::get('/login', 'Auth\AuthController@getLogin');
+    Route::post('/login', 'Auth\AuthController@postLogin');
+    Route::get('/logout', 'Auth\AuthController@getLogout');
 } );
+
+

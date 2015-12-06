@@ -27,6 +27,8 @@ module ytm.comment {
         comment():void {
             console.log(this.commentText);
             var ids = this.getSearchResultsFields('videoId');
+            
+            
             this.commentService.comment(this.commentText, ids)
                                 .then(function(data : string) {
 

@@ -17,8 +17,12 @@ var ytm;
             SearchController.prototype.search = function () {
                 var _this = this;
                 var promise = this.searchService.search(this.searchData);
+                var searchBox = $('#search-results-box');
+                var uiBlocker = new ytm.helpers.ui.uiBlocker;
+                uiBlocker.blockElement(searchBox);
                 promise.then(function (results) {
                     _this.searchService.searchResults = _this.results = results;
+                    uiBlocker.unblockElement(searchBox);
                 });
             };
             SearchController.$inject = ['searchService', '$scope'];

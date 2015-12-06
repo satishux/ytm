@@ -105,7 +105,7 @@ elixir(function (mix) {
      * comment
      */
         "src/comment/comment.service.js",
-        "src/comment/comment.controller.js"
+        "src/comment/comment.controller.js",
 
 
     /**
@@ -113,6 +113,7 @@ elixir(function (mix) {
      *
      * "src/helpers/promise.js" // not required now
      */
+        "src/helpers/ui/uiBlocker.js"
 
 
     ], 'public/js/app.js');

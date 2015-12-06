@@ -34,8 +34,6 @@
 </head>
 <body>
 <div id="wrapper">
-    @include('layouts.top-bar')
-    @include('layouts.left-sidebar')
     @yield('content')
 
 </div>

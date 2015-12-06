@@ -22,9 +22,7 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right pull-right">
-                    <li>
-                        <a class="waves-effect waves-light btn btn-danger" href="/auth/login/google">Login</a>
-                    </li>
+
                     <li class="dropdown hidden-xs">
                         @include('layouts.top-nav.notifications')
                     </li>
@@ -34,15 +32,22 @@
                     <li class="hidden-xs">
                         <a href="#" class="right-bar-toggle waves-effect waves-light"><i class="ti-settings"></i></a>
                     </li>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
-                        </ul>
-                    </li>
+                    @if(Auth::user())
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">{{ Auth::user()->name }} </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
+                                <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
+                                <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
+                                <li><a href="/auth/logout"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li>
+                            <a class="waves-effect waves-light btn btn-danger" href="/auth/login/google">Login</a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
             <!--/.nav-collapse -->

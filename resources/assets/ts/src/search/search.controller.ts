@@ -32,9 +32,15 @@ module ytm.search {
 
         search():void {
             var promise = this.searchService.search(this.searchData);
+            var searchBox = $('#search-results-box');
 
+            var uiBlocker  = new ytm.helpers.ui.uiBlocker;
+
+            uiBlocker.blockElement(searchBox);
+          
             promise.then((results : Array<IVideoSearchResults> ) => {
                 this.searchService.searchResults = this.results = results ;
+                uiBlocker.unblockElement(searchBox);
             });
         }
     }

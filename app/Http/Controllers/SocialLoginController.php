@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 use Illuminate\Contracts\Auth\Guard as Auth;
 
+use App\Ytm\Repos\DB\UserDB;
+
 class SocialLoginController extends Controller
 {
     /**
@@ -30,11 +32,14 @@ class SocialLoginController extends Controller
 
     protected $request;
 
-    function __construct(Socialite $socialite, Auth $auth, Request $request)
+    protected $userdb;
+
+    function __construct(Socialite $socialite, Auth $auth, Request $request, UserDB $userdb)
     {
         $this->socialite = $socialite;
         $this->auth = $auth;
         $this->request = $request;
+        $this->userdb = $userdb;
     }
 
     /**
@@ -59,13 +64,25 @@ class SocialLoginController extends Controller
             return $this->getAuthorization($provider);
 
         }
+
         ///$user = $this->user->findByUsernameOrCreate($this->socialUser($provider));
 
         $user = $this->socialUser($provider);
+        session(['g_name'=> $user->getName(),
+                 'g_email' => $user->getEmail(),
+                 'g_token'=> json_encode($user->token)]);
 
-        session(['g_token'=> json_encode($user->token) ]);
+        if( ! $this->userdb->existingUser($user))
+        {
+            //if new user, show form to create new user
+            return redirect()->route('user.create');
+        }
 
-        return redirect()->route('search.video');
+        if( $this->userdb->loginUser() )
+        {
+            return redirect()->route('search.video');
+        }
+
     }
 
     /**

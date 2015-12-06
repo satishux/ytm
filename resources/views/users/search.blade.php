@@ -1,6 +1,6 @@
-@extends('master')
+@extends('users.dashboard')
 
-@section('content')
+@section('page')
     <div class="content-page">
         <!-- Start content -->
         <div class="content">
@@ -32,7 +32,7 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card-box m-t-40">
+                        <div class="card-box m-t-40" id="search-results-box">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div ng-hide="search.results.length">

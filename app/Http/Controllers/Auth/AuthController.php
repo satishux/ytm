@@ -21,7 +21,10 @@ class AuthController extends Controller
     |
     */
 
+    protected $redirectPath = '/auth/login/google';
+
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
 
     /**
      * Create a new authentication controller instance.
