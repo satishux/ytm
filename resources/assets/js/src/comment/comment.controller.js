@@ -7,7 +7,7 @@ var ytm;
             function CommentController(searchService, commentService) {
                 this.searchService = searchService;
                 this.commentService = commentService;
-                this.commentText = "this is";
+                this.commentText = "";
             }
             CommentController.prototype.comment = function () {
                 this.commentText = this.removeHTMLEntities(this.commentText);
