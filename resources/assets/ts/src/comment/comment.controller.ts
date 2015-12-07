@@ -20,7 +20,7 @@ module ytm.comment {
         constructor(searchService : ytm.services.ISearchService, commentService : ytm.services.ICommentService) {
             this.searchService = searchService;
             this.commentService = commentService;
-            this.commentText = "this is";
+            this.commentText = "";
         }
 
         comment():void {
