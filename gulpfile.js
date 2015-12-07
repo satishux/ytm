@@ -159,6 +159,10 @@ elixir(function (mix) {
     //mix.copy('bower_components/detect-mobile-browser/detectmobilebrowser.js', 'public/js/detect.js');
     //mix.copy('bower_components/fastclick/lib/fastclick.js', 'public/js/fastclick.js');
 
+    //mix.copy('bower_components/summernote/dist/summernote.js', 'public/js/summernote.js');
+    //mix.copy('bower_components/summernote/dist/summernote.css', 'public/css/summernote.css');
+    //mix.copy('bower_components/angular-summernote/dist/angular-summernote.js', 'public/js/angular-summernote.js');
+
 
     mix.browserSync({
         proxy: "localhost:8000"

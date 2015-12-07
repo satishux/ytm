@@ -32,9 +32,11 @@
     "simple-line-icons": "~2.2.3",
     "fastclick": "~1.0.6",
     "detect-mobile-browser": "~0.0.1",
-    "system.js": "~0.19.*"
+    "system.js": "~0.19.*",
+    "angular-summernote": "~0.5.2"
   },
   "resolutions": {
-    "jquery": "2.1.4"
+    "jquery": "2.1.4",
+    "summernote": "~0.6.4"
   }
 }

@@ -8,7 +8,8 @@ var ytm;
                 this.searchData = {
                     input: '',
                     type: 'video',
-                    order: 'relevance'
+                    order: 'relevance',
+                    count: 10
                 };
                 this.searchService = searchService;
                 this.results = this.searchService.searchResults;

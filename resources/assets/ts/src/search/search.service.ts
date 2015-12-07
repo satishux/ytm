@@ -18,6 +18,7 @@ module ytm.services {
         input : string;
         type : string;
         order : string;
+        count : number
     }
     export interface ISearchService {
         searchResults : Array<IVideoSearchResults>;
@@ -38,7 +39,7 @@ module ytm.services {
 
         search(query : ISearchObj) : ng.IPromise<Array<IVideoSearchResults>> {
 
-            return  this.$http.get('/api/videos/search?data=' + JSON.stringify(query))
+            return  this.$http.get('/api/youtube/search?data=' + JSON.stringify(query))
                                 .then(function(response : ng.IHttpPromiseCallbackArg<Array<IVideoSearchResults>>) : Array<IVideoSearchResults> {
                                     return response.data;
                                 });

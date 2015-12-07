@@ -17,8 +17,6 @@ class GAPIVideoController extends Controller
      */
     protected $youtube;
 
-    protected $errors;
-
     /**
      * GApiController constructor.
      * @param Youtube $youtube
@@ -26,7 +24,6 @@ class GAPIVideoController extends Controller
     public function __construct( Youtube $youtube)
     {
         $this->youtube = $youtube;
-        $this->errors = [];
     }
 
     /**
@@ -34,18 +31,10 @@ class GAPIVideoController extends Controller
      * @param $query
      * @return array|bool|string
      */
-    public function searchVideos( Request $request)
+    public function search( Request $request)
     {
-        if( ! $request->isXmlHttpRequest())
-        {
-            $this->errors['reason']  = 'Not XMLHttpRequest';
-            return json_encode($this->errors);
-        }
-
         $data = json_decode($request->get('data'), true);
-
-        $results = $this->youtube->getVideoList(['q' => $data['input'], 'maxResults' => 5, 'type' => $data['type'], 'order' => $data['order']]);
-
+        $results = $this->youtube->search($data['input'])->maxResults(intval($data['count']))->type($data['type'])->orderBy($data['order'])->get();
         return $results;
 
     }

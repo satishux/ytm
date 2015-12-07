@@ -7,15 +7,18 @@ var ytm;
             function CommentController(searchService, commentService) {
                 this.searchService = searchService;
                 this.commentService = commentService;
-                this.commentText = "";
+                this.commentText = "this is";
             }
             CommentController.prototype.comment = function () {
-                console.log(this.commentText);
+                this.commentText = this.removeHTMLEntities(this.commentText);
                 var ids = this.getSearchResultsFields('videoId');
                 this.commentService.comment(this.commentText, ids)
                     .then(function (data) {
                     console.log(data);
                 });
+            };
+            CommentController.prototype.removeHTMLEntities = function (contents) {
+                return $('<div />').html(contents).text();
             };
             CommentController.prototype.getSearchResultsFields = function (field) {
                 return this.searchService.searchResults.map(function (a) {

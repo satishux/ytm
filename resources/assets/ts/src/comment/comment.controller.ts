@@ -20,12 +20,11 @@ module ytm.comment {
         constructor(searchService : ytm.services.ISearchService, commentService : ytm.services.ICommentService) {
             this.searchService = searchService;
             this.commentService = commentService;
-            this.commentText = "";
-
+            this.commentText = "this is";
         }
 
         comment():void {
-            console.log(this.commentText);
+            this.commentText = this.removeHTMLEntities(this.commentText);
             var ids = this.getSearchResultsFields('videoId');
             
             
@@ -35,6 +34,10 @@ module ytm.comment {
                                     console.log(data);
                                 });
 
+        }
+
+        private removeHTMLEntities(contents : string) {
+            return $('<div />').html(contents).text();
         }
 
         private getSearchResultsFields(field : string) {

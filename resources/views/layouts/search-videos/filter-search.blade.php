@@ -47,6 +47,19 @@
                     @endforeach
                 </div>
 
+                <div class="col-md-4">
+                    <h4 class="m-t-0 header-title"><b>Type</b></h4>
+                    @foreach(['10' => '10', '20' => '20', '30' => '30', '40' => '40', '50' =>  '50'] as $key=>$value)
+                        <div class="radio radio-primary">
+                            <input type="radio" name="result-count" id="result-count-{{ $value }}" value="{{ $value }}"
+                                   ng-model="search.searchData.count">
+                            <label for="result-count-{{ $value }}">
+                                {{ $key }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

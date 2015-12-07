@@ -12,10 +12,10 @@
 */
 
 
-Route::group( [ 'prefix' => 'api' ], function ()
+Route::group( [ 'prefix' => 'api', 'middleware' => 'ajax' ], function ()
 {
-    Route::get( '/videos/search', [ 'uses' => 'API\GAPIVideoController@searchVideos', 'as' => 'api.videos.search' ] );
-    Route::get( '/comment/insert', [ 'uses' => 'API\GAPICommentController@comment', 'as' => 'api.comment.insert' ] );
+    Route::get( '/youtube/search', [ 'uses' => 'API\GAPIVideoController@search', 'as' => 'api.youtube.search' ] );
+    Route::post( '/comment/insert', [ 'uses' => 'API\GAPICommentController@comment', 'as' => 'api.comment.insert' ] );
 } );
 
 

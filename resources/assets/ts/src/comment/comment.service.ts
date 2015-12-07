@@ -22,10 +22,18 @@ module ytm.services {
             };
             console.log(JSON.stringify(str));
 
-            return this.$http.get('/api/comment/insert?commentThread='+ JSON.stringify(str))
-                        .then(function(response : ng.IHttpPromiseCallbackArg<any>) {
-                           return response.data;
-                        });
+            //return this.$http.get('/api/comment/insert?commentThread='+ JSON.stringify(str))
+            //            .then(function(response : ng.IHttpPromiseCallbackArg<any>) {
+            //               return response.data;
+            //            });
+
+            return this.$http({
+                'method' : 'POST',
+                'url' : '/api/comment/insert',
+                'data' : $.param(str)
+            }).then(function(response : ng.IHttpPromiseCallbackArg<any>) {
+                 return response.data;
+            });
         }
 
 

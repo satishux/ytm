@@ -65,7 +65,8 @@
                         <div class="card-box">
                             <div ng-controller="commentController as comment">
                                 <h4><b>Comment</b></h4>
-                                <textarea name="comment-area" id="comment-area" ng-model="comment.commentText" style="width : 100%; min-height : 200px"></textarea>
+                                <summernote name="comment-area" on-change="comment.summernoteChange(contents)" id="comment-area" ng-model="comment.commentText" height="300"></summernote>
+                                {{--<textarea name="comment-area" summernote id="comment-area" ng-model="comment.commentText" style="width : 100%; min-height : 200px"></textarea>--}}
                                 <button ng-click="comment.comment()" class="btn btn-primary pull-right">Comment</button>
                             </div>
                             <span class="clearfix"></span>
@@ -78,4 +79,12 @@
     </div>
 
 
+@stop
+
+@section('styles-top')
+    <link rel="stylesheet" href="/css/summernote.css">
+@stop
+@section('scripts-top')
+    <script src="/js/summernote.js"></script>
+    <script src="/js/angular-summernote.js"></script>
 @stop

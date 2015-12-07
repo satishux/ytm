@@ -23,6 +23,8 @@ class Youtube {
     protected $youtube;
 
 
+    protected $searchString;
+
     /**
      * GapiRepo constructor.
      */
@@ -36,47 +38,57 @@ class Youtube {
         $this->client->setAccessToken( session( "g_token" ) );
 
         $this->youtube = new Google_Service_YouTube( $this->client );
+
+
+        $this->searchString = [
+            'q' => "",
+            'maxResults' => 5,
+            'type' => 'video',
+            'order' => 'relevance'
+        ];
+
     }
 
 
-    /**
-     * @param array $params
-     *
-     * @return array|bool
-     */
-    public function getVideoList ( Array $params )
+    public function search ( $query )
     {
-        try
+        $this->searchString['q'] = $query;
+        return $this;
+    }
+
+    public function maxResults ( $limit )
+    {
+        $limit = ($limit > 50) ? 50 : $limit;
+        $this->searchString['maxResults'] = $limit;
+
+        return $this;
+    }
+
+
+    public function type ( $type )
+    {
+        $this->searchString['type'] = $type;
+
+        return $this;
+    }
+
+    public function orderBy ( $order )
+    {
+        $this->searchString['order'] = $order;
+        return $this;
+    }
+
+    public function get ()
+    {
+       try
         {
 
-
-            $searchResponse = $this->youtube->search->listSearch( 'id,snippet', $params );
+            $searchResponse = $this->youtube->search->listSearch( 'id,snippet', $this->searchString);
 
             $results = [ ];
             foreach ( $searchResponse->getItems() as $searchResult )
             {
-
-//                if ( $searchResult["id"]["kind"] == "youtube#video" )
-//                {
-
-                $obj = new \stdClass;
-
-                $obj->videoId = $searchResult['id']['videoId'];
-                $obj->kind = $searchResult['id']['kind'];
-
-
-                $obj->publishedAt = $searchResult['snippet']['publishedAt'];
-                $obj->channelId = $searchResult['snippet']['channelId'];
-                $obj->title = $searchResult['snippet']['title'];
-                $obj->description = $searchResult['snippet']['description'];
-                $obj->thumbnailDefault = $searchResult['snippet']['thumbnails']['default']['url'];
-                $obj->thumbnailMedium = $searchResult['snippet']['thumbnails']['medium']['url'];
-                $obj->thumbnailHigh = $searchResult['snippet']['thumbnails']['high']['url'];
-                $obj->channelTitle = $searchResult['snippet']['channelTitle'];
-                $obj->liveBroadcastContent = $searchResult['snippet']['liveBroadcastContent'];
-
-                $results[] = $obj;
-//                }
+                $results[] = $this->createVideoObject( $searchResult );
             }
 
             return $results;
@@ -89,6 +101,7 @@ class Youtube {
             return false;
         }
     }
+
 
     /**
      * @param       $commentText
@@ -163,6 +176,31 @@ class Youtube {
         {
             return false;
         }
+    }
+
+    /**
+     * @param $searchResult
+     *
+     * @return \stdClass
+     */
+    private function createVideoObject ( $searchResult )
+    {
+        $obj = new \stdClass;
+
+        $obj->videoId = $searchResult['id']['videoId'];
+        $obj->kind = $searchResult['id']['kind'];
+
+        $obj->publishedAt = $searchResult['snippet']['publishedAt'];
+        $obj->channelId = $searchResult['snippet']['channelId'];
+        $obj->title = $searchResult['snippet']['title'];
+        $obj->description = $searchResult['snippet']['description'];
+        $obj->thumbnailDefault = $searchResult['snippet']['thumbnails']['default']['url'];
+        $obj->thumbnailMedium = $searchResult['snippet']['thumbnails']['medium']['url'];
+        $obj->thumbnailHigh = $searchResult['snippet']['thumbnails']['high']['url'];
+        $obj->channelTitle = $searchResult['snippet']['channelTitle'];
+        $obj->liveBroadcastContent = $searchResult['snippet']['liveBroadcastContent'];
+
+        return $obj;
     }
 
 

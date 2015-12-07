@@ -9,7 +9,7 @@ var ytm;
                 this.searchResults = null;
             }
             SearchService.prototype.search = function (query) {
-                return this.$http.get('/api/videos/search?data=' + JSON.stringify(query))
+                return this.$http.get('/api/youtube/search?data=' + JSON.stringify(query))
                     .then(function (response) {
                     return response.data;
                 });

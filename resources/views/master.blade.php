@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="/images/favicon_1.ico">
 
 
+    @yield('styles-top')
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="/css/core.css" rel="stylesheet" type="text/css" />
     <link href="/css/components.css" rel="stylesheet" type="text/css" />
@@ -21,6 +22,7 @@
     <link href="/css/pages.css" rel="stylesheet" type="text/css" />
     <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/css/waves.css" rel="stylesheet" type="text/css">
+    @yield('styles-bottom')
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,10 +55,13 @@
 <script src="/js/wow.js"></script>
 <script src="/js/jquery.nicescroll.js"></script>
 
-<script src="/js/angular.js"></script>
 
+<script src="/js/angular.js"></script>
 <script src="/js/theme.core.js"></script>
+
+@yield('scripts-top')
 <script src="/js/app.js"></script>
+@yield('scripts-bottom')
 <script>
     (function() {
         Waves.attach('.btn', 'waves-light');
