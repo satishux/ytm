@@ -100,6 +100,7 @@ elixir(function (mix) {
      */
         "src/search/search.service.js",
         "src/search/search.controller.js",
+        "src/search/searchResult.directive.js",
 
     /**
      * comment

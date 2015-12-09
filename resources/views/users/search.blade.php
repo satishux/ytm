@@ -38,20 +38,32 @@
                                         <div ng-hide="search.results.length">
                                             <h3>No search results to display..</h3>
                                         </div>
-                                        <div class="search-item row m-t-20" ng-repeat="result in search.results">
-                                            <div style="display: table-cell; vertical-align: top;">
-                                                <a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank">
-                                                    <img ng-src="@{{ result.thumbnailDefault }}">
-                                                </a>
-                                            </div>
-                                            <div style="display : table-cell; vertical-align: top; padding-left : 20px">
-                                                <h3 class="h5 font-600 m-b-5"><a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank" ng-bind="result.title"></a></h3>
-                                                <div class="font-13 text-success m-b-10" ng-bind="result.channelTitle">
-                                                </div>
-                                                <p ng-bind="result.description">
-                                                </p>
-                                            </div>
-                                        </div>
+
+                                        <search-result result-data="result" ng-repeat="result in search.results"></search-result>
+                                        {{--<div class="search-item row m-t-20" ng-repeat="result in search.results">--}}
+                                                {{--<div class="pull-left">--}}
+                                                    {{--<div style="display: table-cell; vertical-align: top;">--}}
+                                                        {{--<a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank">--}}
+                                                            {{--<img ng-src="@{{ result.thumbnailDefault }}">--}}
+                                                        {{--</a>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div style="display : table-cell; vertical-align: top; padding-left : 20px">--}}
+                                                        {{--<h3 class="h5 font-600 m-b-5"><a href="https://www.youtube.com/watch?v=@{{ result.videoId }}" target="_blank" ng-bind="result.title"></a></h3>--}}
+                                                        {{--<div class="font-13 text-success m-b-10" ng-bind="result.channelTitle">--}}
+                                                        {{--</div>--}}
+                                                        {{--<p ng-bind="result.description">--}}
+                                                        {{--</p>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+
+                                                {{--<div class="action-buttons pull-right">--}}
+                                                    {{--<button class="btn btn-icon waves-effect waves-light btn-white" ng-click="search.select(result.videoId)"> <i class="fa fa-check"></i> </button>--}}
+                                                    {{--<button class="btn btn-icon waves-effect waves-light btn-danger" ng-click="search.remove(result.videoId)"> <i class="fa fa-remove"></i> </button>--}}
+                                                {{--</div>--}}
+
+                                        {{--</div>--}}
+
+
                                     </div>
                                 </div>
                         <!-- Search Result Box Ends -->
@@ -65,7 +77,7 @@
                         <div class="card-box">
                             <div ng-controller="commentController as comment">
                                 <h4><b>Comment</b></h4>
-                                <summernote name="comment-area" on-change="comment.summernoteChange(contents)" id="comment-area" ng-model="comment.commentText" height="300"></summernote>
+                                <summernote name="comment-area" on-change="comment.summernoteChange(contents)" id="comment-area" ng-model="comment.commentText" height="200"></summernote>
                                 {{--<textarea name="comment-area" summernote id="comment-area" ng-model="comment.commentText" style="width : 100%; min-height : 200px"></textarea>--}}
                                 <button ng-click="comment.comment()" class="btn btn-primary pull-right">Comment</button>
                             </div>

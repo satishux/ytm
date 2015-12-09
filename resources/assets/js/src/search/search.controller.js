@@ -26,6 +26,12 @@ var ytm;
                     uiBlocker.unblockElement(searchBox);
                 });
             };
+            SearchController.prototype.select = function (searchResultId) {
+                console.log(searchResultId + ' is selected');
+            };
+            SearchController.prototype.remove = function (searchResultId) {
+                console.log(searchResultId + ' is removed');
+            };
             SearchController.$inject = ['searchService', '$scope'];
             return SearchController;
         })();

@@ -1,6 +1,4 @@
 module ytm.search {
-    import IVideoSearchResults = ytm.services.IVideoSearchResults;
-    import ISearchObj = ytm.services.ISearchObj;
     'use strict';
 
     interface ISearchController {
@@ -39,10 +37,18 @@ module ytm.search {
 
             uiBlocker.blockElement(searchBox);
           
-            promise.then((results : Array<IVideoSearchResults> ) => {
+            promise.then((results : Array<ytm.services.IVideoSearchResults> ) => {
                 this.searchService.searchResults = this.results = results ;
                 uiBlocker.unblockElement(searchBox);
             });
+        }
+
+        select(searchResultId : string): void {
+            console.log(searchResultId + ' is selected');
+        }
+
+        remove(searchResultId : string): void {
+            console.log(searchResultId + ' is removed');
         }
     }
 

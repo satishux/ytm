@@ -21,7 +21,7 @@
         <div class="portlet-body">
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <h4 class="m-t-0 header-title"><b>Sort By</b></h4>
                     @foreach(['Relevance' => 'relevance', 'Rating' => 'rating', 'Date' =>  'date', 'Title' => 'title', 'Viewcount' => 'viewCount'] as $key=>$value)
                         <div class="radio radio-primary">
@@ -34,7 +34,7 @@
                     @endforeach
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <h4 class="m-t-0 header-title"><b>Type</b></h4>
                     @foreach(['Video' => 'video', 'Channel' => 'channel', 'Playlist' =>  'palylist'] as $key=>$value)
                         <div class="radio radio-primary">
@@ -47,8 +47,8 @@
                     @endforeach
                 </div>
 
-                <div class="col-md-4">
-                    <h4 class="m-t-0 header-title"><b>Type</b></h4>
+                <div class="col-md-2">
+                    <h4 class="m-t-0 header-title"><b>Results</b></h4>
                     @foreach(['10' => '10', '20' => '20', '30' => '30', '40' => '40', '50' =>  '50'] as $key=>$value)
                         <div class="radio radio-primary">
                             <input type="radio" name="result-count" id="result-count-{{ $value }}" value="{{ $value }}"
